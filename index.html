@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DogeCoin to the Moon</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script>
+        var price;
+        function getDogeCoinData() {
+            $.get("https://sochain.com/api/v2/get_price/DOGE/USD", function (response) {
+                document.getElementById("Network").textContent = "Network: " + response.data.network
+                document.getElementById("Exchange").textContent = "Exchange: " + response.data.prices[0].exchange
+                document.getElementById("Price").textContent = "Price: " + response.data.prices[0].price
+                document.getElementById("Price_Base").textContent = "Price Base: " + response.data.prices[0].price_base
+                document.getElementById("Time").textContent = "Time: " + response.data.prices[0].time
+                price = response.data.prices[0].price
+            }, "json");
+        }
+        function calculateDogeCoins(){
+            var inputCoins = document.getElementById("dogecoinInput").value
+            var result = inputCoins * price
+            document.getElementById("result").textContent = result + "$"
+        }
+
+    </script>
+</head>
+
+<body onload="getDogeCoinData()">
+    <input class="dogecoin input" type="number" id="dogecoinInput" name="dogecoinInput" autocomplete="off" placeholder="" required></input>
+    <button class="start button" type="button" id="startButton" name="startButton" onclick="getDogeCoinData(), calculateDogeCoins()" >Start</button>
+    <textarea name="result" id ="result" cols="50" rows="1" class="dogecoin result" readonly> </textarea>
+    <br> </br>
+    <br> </br>
+    <br> </br>
+    <br> </br>
+    <textarea name="Network" id="Network" cols="20" rows="1" class = "dogecoin Network" readonly> </textarea> </br>
+    <textarea name="Exchange" id="Exchange" cols="20" rows="1" class = "dogecoin Exchange" readonly> </textarea> </br>
+    <textarea name="Price" id="Price" cols="20" rows="1" class = "dogecoin Price" readonly> </textarea> </br>
+    <textarea name="Price_Base" id="Price_Base" cols="20" rows="1" class = "dogecoin Price_Base" readonly> </textarea> </br>
+    <textarea name="Time" id="Time" cols="20" rows="1" class = "dogecoin Time" readonly> </textarea> </br>
+</body>
+
+</html>
