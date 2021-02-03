@@ -9,11 +9,11 @@
     <script>
         function getDogeCoinData() {
             $.get("https://sochain.com/api/v2/get_price/DOGE/USD", function (response) {
-                document.getElementById("Network").textContent = "Network: " + response.data.network
-                document.getElementById("Exchange").textContent = "Exchange: " + response.data.prices[0].exchange
-                document.getElementById("Price").textContent = "Price: " + response.data.prices[0].price
-                document.getElementById("Price_Base").textContent = "Price Base: " + response.data.prices[0].price_base
-                document.getElementById("Time").textContent = "Time: " + response.data.prices[0].time
+                document.getElementById("Network").value = "Network: " + response.data.network
+                document.getElementById("Exchange").value = "Exchange: " + response.data.prices[0].exchange
+                document.getElementById("Price").value = "Price: " + response.data.prices[0].price
+                document.getElementById("Price_Base").value = "Price Base: " + response.data.prices[0].price_base
+                document.getElementById("Time").value = "Time: " + response.data.prices[0].time
             }, "json");
         }
         function calculateDogeCoins(){
@@ -21,7 +21,7 @@
                 var price = response.data.prices[0].price
                 var inputCoins = document.getElementById("dogecoinInput").value
                 var result = inputCoins * price
-                document.getElementById("result").textContent = result + "$"
+                document.getElementById("result").value = result + "$"
             }, "json");
             
         }
@@ -32,16 +32,16 @@
 <body onload="getDogeCoinData()">
     <input class="dogecoin input" type="number" id="dogecoinInput" name="dogecoinInput" autocomplete="off" placeholder="" required></input>
     <button class="start button" type="button" id="startButton" name="startButton" onclick="getDogeCoinData(), calculateDogeCoins()" >Start</button>
-    <textarea name="result" id ="result" cols="50" rows="1" class="dogecoin result" readonly> </textarea>
+    <input name="result" id ="result" cols="50" rows="1" class="dogecoin result" readonly> </input>
     <br> </br>
     <br> </br>
     <br> </br>
     <br> </br>
-    <textarea name="Network" id="Network" cols="20" rows="1" class = "dogecoin Network" readonly> </textarea> </br>
-    <textarea name="Exchange" id="Exchange" cols="20" rows="1" class = "dogecoin Exchange" readonly> </textarea> </br>
-    <textarea name="Price" id="Price" cols="20" rows="1" class = "dogecoin Price" readonly> </textarea> </br>
-    <textarea name="Price_Base" id="Price_Base" cols="20" rows="1" class = "dogecoin Price_Base" readonly> </textarea> </br>
-    <textarea name="Time" id="Time" cols="20" rows="1" class = "dogecoin Time" readonly> </textarea> </br>
+    <input name="Network" id="Network" cols="20" rows="1" class = "dogecoin Network" readonly> </input> </br>
+    <input name="Exchange" id="Exchange" cols="20" rows="1" class = "dogecoin Exchange" readonly> </input> </br>
+    <input name="Price" id="Price" cols="20" rows="1" class = "dogecoin Price" readonly> </input> </br>
+    <input name="Price_Base" id="Price_Base" cols="20" rows="1" class = "dogecoin Price_Base" readonly> </input> </br>
+    <input name="Time" id="Time" cols="20" rows="1" class = "dogecoin Time" readonly> </input> </br>
 </body>
 
 </html>
