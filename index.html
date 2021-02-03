@@ -7,6 +7,7 @@
     <title>DogeCoin to the Moon</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script>
+        var DogeCoinCalculateResult;
         function getDogeCoinData() {
             $.get("https://sochain.com/api/v2/get_price/DOGE/USD", function (response) {
                 document.getElementById("Network").value = "Network: " + response.data.network
@@ -20,19 +21,32 @@
 			$.get("https://sochain.com/api/v2/get_price/DOGE/USD", function (response) {
                 var price = response.data.prices[0].price
                 var inputCoins = document.getElementById("dogecoinInput").value
-                var result = inputCoins * price
-                document.getElementById("result").value = result + "$"
+                DogeCoinCalculateResult = inputCoins * price
+                if(DogeCoinCalculateResult != null){
+                calculateDogeCoinsInEuro()
+                }
             }, "json");
             
         }
-
+        function calculateDogeCoinsInEuro(){
+            $.get("https://api.exchangeratesapi.io/latest", function(response)
+            {
+                var USDRate = response.rates.USD
+                var currentPrice = DogeCoinCalculateResult
+                var newPrice = currentPrice / USDRate
+                console.log(USDRate)
+                console.log(currentPrice)
+                console.log(newPrice)
+                document.getElementById("result").value = newPrice + "€"
+            });   
+        }
     </script>
 </head>
 
 <body onload="getDogeCoinData()">
-    <input class="dogecoin input" type="number" id="dogecoinInput" name="dogecoinInput" autocomplete="off" placeholder="" required></input>
-    <button class="start button" type="button" id="startButton" name="startButton" onclick="getDogeCoinData(), calculateDogeCoins()" >Start</button>
-    <input name="result" id ="result" cols="50" rows="1" class="dogecoin result" readonly> </input>
+    DogeCoins: <input class="dogecoin input" type="number" id="dogecoinInput" name="dogecoinInput" autocomplete="off" placeholder="" required></input> </br></br>
+    <button class="start button" type="button" id="startButton" name="startButton" onclick="getDogeCoinData(), calculateDogeCoins()" >Start</button> </br></br>
+    Euro:  <input name="result" id ="result" cols="50" rows="1" class="dogecoin result" readonly></input>
     <br> </br>
     <br> </br>
     <br> </br>
