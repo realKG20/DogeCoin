@@ -7,6 +7,7 @@
 	<link rel="shortcut icon" href="dogecoin.png" type="image/x-icon">
     <title>DogeCoin to the Moon</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="script.js"></script>
     <script>
         var DogeCoinCalculateResult;
         function getDogeCoinData() {
@@ -46,7 +47,7 @@
 
 <body onload="getDogeCoinData()">
     DogeCoins: <input class="dogecoin input" type="number" id="dogecoinInput" name="dogecoinInput" autocomplete="off" placeholder="" required></input> </br></br>
-    <button class="start button" type="button" id="startButton" name="startButton" onclick="getDogeCoinData(), calculateDogeCoins()" >Start</button> </br></br>
+    <button class="start button" type="button" id="startButton" name="startButton" onclick="getDogeCoinData(), calculateDogeCoins(), ButtonPress()" >Start</button> </br></br>
     Euro:  <input name="result" id ="result" cols="50" rows="1" class="dogecoin result" readonly></input>
     <br> </br>
     <br> </br>
